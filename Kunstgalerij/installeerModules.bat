@@ -1,2 +1,2 @@
-npm install express mysql2 body-parser cors
+npm install express mysql2 cors
 pause

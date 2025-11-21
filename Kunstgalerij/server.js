@@ -61,7 +61,7 @@ app.post("/api/users/login", async (req, res) => {
 });
 
 // ===============================================================
-// ARTWORKS: lijst + zoeken
+// ARTWORKS: lijst en zoeken
 // ===============================================================
 app.get("/api/artworks", async (req, res) => {
   const search = req.query.q;
