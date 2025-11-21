@@ -1,6 +1,6 @@
 // server.js - Virtuele Kunstgalerij API
 const express = require('express');
-const mysql = require('mysql2/promise');
+const mysql = require('mysql2');
 const cors = require('cors');
 //Cors is een beveiliging, zie https://mbo-sd.nl/lesson/node-js/express/cors
 
