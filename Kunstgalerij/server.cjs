@@ -29,16 +29,7 @@ const pool = mysql.createPool({
   queueLimit: 0
 });
 
-// Test de verbinding
-pool.getConnection()
-  .then(connection => {
-    console.log('Verbonden met MySQL database!');
-    connection.release();
-  })
-  .catch(err => {
-    console.error('Fout bij verbinden met database:', err);
-  });
-
+/* Rudy: User registratie tijdelijk uitgezet ivm ontwikkelen en testen
 // ===============================================================
 // USERS (registratie & login – simpel voorbeeld)
 // ===============================================================
@@ -75,7 +66,7 @@ app.post("/api/users/login", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
+*/
 // ===============================================================
 // ARTWORKS: lijst en zoeken
 // ===============================================================
