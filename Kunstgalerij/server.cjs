@@ -1,6 +1,7 @@
 // server.js - Virtuele Kunstgalerij API
 const express = require('express');
-const mysql = require('mysql2');
+const mysql = require('mysql2/promise'); // Gebruik de promise-versie
+//Zie https://help.securityjourney.com/why-we-use-the-mysql2/promise-library-for-javascript-and-typescript
 const cors = require('cors');
 //Cors is een beveiliging, zie https://mbo-sd.nl/lesson/node-js/express/cors
 
@@ -15,6 +16,7 @@ const PORT = 3000;
 app.use(cors({
   origin: 'http://localhost:5173' // Poort van je frontend naar de backend
 }));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
