@@ -8,7 +8,13 @@ const app = express();
 const PORT = 3000;
 
 // ---- Middleware ----
-app.use(cors());
+/* Zonder onderstaande regel krijg je een network error (500)
+ CORS (Cross-Origin Resource Sharing) stelt de server in staat om webbrowsers 
+ toe te staan verzoeken te doen naar bronnen op een ander domein dan waar de webpagina 
+ vandaan komt */
+app.use(cors({
+  origin: 'http://localhost:5173' // Poort van je frontend naar de backend
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -244,5 +250,5 @@ app.post("/api/comments", async (req, res) => {
 // SERVER START
 // ===============================================================
 app.listen(PORT, () =>
-  console.log(`🎨 Galerij API draait op http://localhost:${PORT}`)
+  console.log(`Galerij API draait op http://localhost:${PORT}`)
 );
