@@ -29,6 +29,16 @@ const pool = mysql.createPool({
   queueLimit: 0
 });
 
+// Test de verbinding
+pool.getConnection()
+  .then(connection => {
+    console.log('Verbonden met MySQL database!');
+    connection.release();
+  })
+  .catch(err => {
+    console.error('Fout bij verbinden met database:', err);
+  });
+
 // ===============================================================
 // USERS (registratie & login – simpel voorbeeld)
 // ===============================================================
