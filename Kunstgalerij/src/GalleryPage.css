@@ -7,7 +7,7 @@
 }
 
 .search-input {
-  width: 100%;
+  width: 92%;
   max-width: 500px;
   padding: 10px;
   border: 1px solid #ddd;
@@ -41,18 +41,18 @@
 
 .artwork-info {
   padding: 15px;
-  background: #fff;
+  background: #5e0101;
 }
 
 .artwork-info h3 {
   margin: 0 0 5px 0;
   font-size: 1.1rem;
-  color: #333;
+  color: #f5d101;
 }
 
 .artwork-info p {
   margin: 0;
-  color: #666;
+  color: #f5d101;
   font-size: 0.9rem;
 }
 

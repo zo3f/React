@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+//Axios Converteert automatisch JSON-gegevens in de respons naar een JavaScript-object.
+//Axios wordt gebruikt om gemakkelijk HTTP-verzoeken (zoals GET, POST, PUT, DELETE) naar servers te sturen/halen
+//Zie https://www.digitalocean.com/community/tutorials/js-axios-vanilla-js
 import { Link } from 'react-router-dom';
 import './GalleryPage.css';
 
@@ -47,40 +50,26 @@ function GalleryPage() {
       </div>
 
       <div className="artwork-grid">
-        {filteredArtworks.length > 0 ? (
-          filteredArtworks.map(artwork => (
-            <div key={artwork.id} className="artwork-card">
-              <Link to={`/artworks/${artwork.id}`}>
-                <div className="artwork-image">
-                  {artwork.image ? (
-                    <img
-                      src={artwork.image.url}
-                      alt={artwork.image.alt_text || artwork.title}
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src = '/placeholder.jpg';
-                      }}
-                    />
-                  ) : (
-                    <img
-                      src="/placeholder.jpg"
-                      alt="Geen afbeelding beschikbaar"
-                    />
-                  )}
-                </div>
-                <div className="artwork-info">
-                  <h3>{artwork.title}</h3>
-                  <p>{artwork.artist_name}</p>
-                  {artwork.year && <p className="artwork-year">{artwork.year}</p>}
-                </div>
-              </Link>
-            </div>
-          ))
-        ) : (
-          <div className="no-results">
-            <p>Geen kunstwerken gevonden</p>
+        {filteredArtworks.map(artwork => (
+          <div key={artwork.id} className="artwork-card">
+            <Link to={`/artworks/${artwork.id}`}>
+              <div className="artwork-image">
+                <img
+                  src={`/artwork/${artwork.artist_name.toLowerCase().replace(' ', '_')}.jpg`}
+                  alt={artwork.title}
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = '/placeholder.jpg';
+                  }}
+                />
+              </div>
+              <div className="artwork-info">
+                <h3>{artwork.title}</h3>
+                <p>{artwork.artist_name}</p>
+              </div>
+            </Link>
           </div>
-        )}
+        ))}
       </div>
     </div>
   );

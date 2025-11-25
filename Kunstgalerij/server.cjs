@@ -19,6 +19,7 @@ app.use(cors({
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use('/artwork', express.static('public/artwork'));
 
 // ---- Database Pool ----
 const pool = mysql.createPool({
@@ -90,13 +91,33 @@ app.get("/api/artworks", async (req, res) => {
     params.push(search);
   }
 
-  try {
+  //Aanpassing naar Artwork URL
+    try {
+    const [artworks] = await pool.execute(sql, params);
+
+    // Haal afbeeldingen op voor elk kunstwerk
+    for (let artwork of artworks) {
+      const [images] = await pool.execute(
+        `SELECT * FROM artwork_images WHERE artwork_id = ? ORDER BY sort_order LIMIT 1`,
+        [artwork.id]
+      );
+      artwork.image = images[0] || null;
+    }
+
+    res.json(artworks);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+  //verkeerde URL van de afbeeldingen????
+  /*try {
     const [rows] = await pool.execute(sql, params);
     res.json(rows);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-});
+});*/
 
 // ===============================================================
 // ARTWORK: bekijk een enkel kunstwerk
