@@ -1,6 +1,7 @@
 // server.js - Virtuele Kunstgalerij API
 const express = require('express');
-const mysql = require('mysql2');
+const mysql = require('mysql2/promise'); // Gebruik de promise-versie
+//Zie https://help.securityjourney.com/why-we-use-the-mysql2/promise-library-for-javascript-and-typescript
 const cors = require('cors');
 //Cors is een beveiliging, zie https://mbo-sd.nl/lesson/node-js/express/cors
 
@@ -8,9 +9,17 @@ const app = express();
 const PORT = 3000;
 
 // ---- Middleware ----
-app.use(cors());
+/* Zonder onderstaande regel krijg je een network error (500)
+ CORS (Cross-Origin Resource Sharing) stelt de server in staat om webbrowsers 
+ toe te staan verzoeken te doen naar bronnen op een ander domein dan waar de webpagina 
+ vandaan komt */
+app.use(cors({
+  origin: 'http://localhost:5173' // Poort van je frontend naar de backend
+}));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use('/artwork', express.static('public/artwork'));
 
 // ---- Database Pool ----
 const pool = mysql.createPool({
@@ -23,6 +32,7 @@ const pool = mysql.createPool({
   queueLimit: 0
 });
 
+/* Rudy: User registratie tijdelijk uitgezet ivm ontwikkelen en testen
 // ===============================================================
 // USERS (registratie & login – simpel voorbeeld)
 // ===============================================================
@@ -59,7 +69,7 @@ app.post("/api/users/login", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
+*/
 // ===============================================================
 // ARTWORKS: lijst en zoeken
 // ===============================================================
@@ -81,13 +91,33 @@ app.get("/api/artworks", async (req, res) => {
     params.push(search);
   }
 
-  try {
+  //Aanpassing naar Artwork URL
+    try {
+    const [artworks] = await pool.execute(sql, params);
+
+    // Haal afbeeldingen op voor elk kunstwerk
+    for (let artwork of artworks) {
+      const [images] = await pool.execute(
+        `SELECT * FROM artwork_images WHERE artwork_id = ? ORDER BY sort_order LIMIT 1`,
+        [artwork.id]
+      );
+      artwork.image = images[0] || null;
+    }
+
+    res.json(artworks);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+  //verkeerde URL van de afbeeldingen????
+  /*try {
     const [rows] = await pool.execute(sql, params);
     res.json(rows);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-});
+});*/
 
 // ===============================================================
 // ARTWORK: bekijk een enkel kunstwerk
@@ -244,5 +274,5 @@ app.post("/api/comments", async (req, res) => {
 // SERVER START
 // ===============================================================
 app.listen(PORT, () =>
-  console.log(`🎨 Galerij API draait op http://localhost:${PORT}`)
+  console.log(`Galerij API draait op http://localhost:${PORT}`)
 );

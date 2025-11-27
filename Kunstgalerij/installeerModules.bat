@@ -1,2 +1,2 @@
-npm install express mysql2 cors
+npm install express mysql2 cors axios
 pause

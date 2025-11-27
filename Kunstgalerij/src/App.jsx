@@ -1,6 +1,10 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
-// 🎨 Placeholder pages – kun je later in aparte bestanden zetten
+//GalleryPage en ArtworkDetail toegevoegd door Rudy als object van de App
+import GalleryPage from './GalleryPage';
+import ArtworkDetailPage from './ArtworkDetailPage';
+
+/* Onderstaande heeft Rudy al toegeveord in losse bestanden
 function GalleryPage() {
   return (
     <div>
@@ -18,7 +22,9 @@ function ArtworkDetailPage() {
     </div>
   );
 }
+*/
 
+//Placeholder pages – kun je later in aparte bestanden zetten
 function FavoritesPage() {
   return (
     <div>

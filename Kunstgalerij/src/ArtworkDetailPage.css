@@ -1,0 +1,140 @@
+.artwork-detail-page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: #1976d2;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.artwork-header {
+  margin-bottom: 30px;
+  border-bottom: 1px solid #5e0101;
+  padding-bottom: 20px;
+}
+
+.artwork-header h1 {
+  margin: 0;
+  color: #f5d101;
+}
+
+.artwork-header h2 {
+  margin: 10px 0 0 0;
+  color: #f5d101;
+  font-weight: normal;
+}
+
+.artwork-content {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.artwork-main-image img {
+  width: 100%;
+  max-height: 500px;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.no-image {
+  background: #5e0101;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  border-radius: 8px;
+}
+
+.artwork-details {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.artwork-description, .artwork-meta, .artwork-techniques {
+  background: #5e0101;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.artwork-description h3, .artwork-meta h3, .artwork-techniques h3 {
+  margin-top: 0;
+  color: #f5d101;
+}
+
+.artwork-meta ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.artwork-meta li {
+  margin-bottom: 8px;
+}
+
+.artwork-techniques ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.artwork-techniques li {
+  background: #e30505;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+.artwork-comments {
+  margin-top: 40px;
+}
+
+.artwork-comments h3 {
+  margin-bottom: 20px;
+  color: #f5d101;
+}
+
+.comment {
+  background: #5e0101;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+}
+
+.comment p {
+  margin: 5px 0;
+}
+
+.comment small {
+  color: #f5d101;
+  font-size: 0.8rem;
+}
+
+.loading, .error, .not-found {
+  text-align: center;
+  padding: 50px;
+  font-size: 1.2rem;
+}
+
+.error {
+  color: #d32f2f;
+}
+
+.not-found {
+  color: #f5d101;
+}
